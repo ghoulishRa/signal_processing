@@ -98,7 +98,6 @@ def load_audio_file():
         ptr = 0
 
         fft_widget.samplerate = samplerate
-        #toggle_button.setEnabled(True)
         restart_stream()
 
         print(f"Loaded: {file_path} | Duration: {len(samples)/samplerate:.2f}s")
@@ -130,7 +129,6 @@ def save_changes():
         return
 
     if current_filter:
-        # Apply filter to entire audio
         filtered_data = apply_filter(data, b_filter, a_filter)
     else:
         filtered_data = data.copy()
