@@ -7,6 +7,9 @@ class FFTPlot:
         self.curve = self.plot.plot(pen='c')
         self.plot.setYRange(10, 60)
         self.plot.setXRange(0, 100, padding=0)
+        self.curve.setPen(pg.mkPen(color='b'))
+        self.curve.setFillLevel(0)
+        self.curve.setBrush((100, 100, 255, 100))  # semi-transparent blue fill
         self.plot.getAxis('bottom').setTicks([[
             (0, "0 Hz"), (15, "100 Hz"), (25, "300 Hz"), (35, "500 Hz"),
             (45, "800 Hz"), (50, "1 kHz"), (65, "3.5 kHz"),

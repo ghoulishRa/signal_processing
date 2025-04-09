@@ -5,12 +5,12 @@ import sys
 from PyQt6.QtWidgets import (
     QApplication, QMainWindow, QWidget,
     QVBoxLayout, QHBoxLayout, QPushButton,
-    QLabel, QSlider, QFileDialog
+    QLabel, QSlider, QFileDialog, QMessageBox
 )
 from PyQt6.QtCore import QTimer, Qt
 
 import sounddevice as sd
-import scipy.io.wavfile as wav
+from scipy.io.wavfile import write as wav_write
 
 from fft_plot import FFTPlot
 from waveform_plot import WaveformPlot
@@ -43,6 +43,7 @@ def audio_callback(outdata, frames, *_):
     if ptr + frames > len(data):
         outdata[:] = np.zeros((frames, 1))
         is_playing = False
+        ptr = 0
         toggle_button.setText("▶ Play")
         raise sd.CallbackStop()
 
@@ -97,7 +98,7 @@ def load_audio_file():
         ptr = 0
 
         fft_widget.samplerate = samplerate
-        toggle_button.setEnabled(True)
+        #toggle_button.setEnabled(True)
         restart_stream()
 
         print(f"Loaded: {file_path} | Duration: {len(samples)/samplerate:.2f}s")
@@ -115,6 +116,40 @@ def restart_stream():
     stream.start()
 
 upload_button.clicked.connect(load_audio_file)
+
+# === Save Changes ===
+
+save_buttton = QPushButton("Saves Changes")
+main_layout.addWidget(save_buttton)
+
+def save_changes():
+    global data, samplerate, b_filter, a_filter, current_filter
+
+    if data is None:
+        QMessageBox.warning(main_window, "Warning", "No audio loaded to save.")
+        return
+
+    if current_filter:
+        # Apply filter to entire audio
+        filtered_data = apply_filter(data, b_filter, a_filter)
+    else:
+        filtered_data = data.copy()
+
+    # Normalize to prevent clipping
+    normalized = filtered_data / np.max(np.abs(filtered_data))
+    int_data = (normalized * 32767).astype(np.int16)
+
+    file_path, _ = QFileDialog.getSaveFileName(
+        main_window, "Save Filtered Audio", "filtered_output.wav", "WAV Files (*.wav)"
+    )
+
+    if file_path:
+        wav_write(file_path, samplerate, int_data)
+        QMessageBox.information(main_window, "Saved", f"Filtered audio saved to:\n{file_path}")
+
+
+save_buttton.clicked.connect(save_changes)
+
 
 # === Progress Label ===
 progress_label = QLabel("00:00 / 00:00")
