@@ -12,10 +12,10 @@ from PyQt6.QtCore import QTimer, Qt
 import sounddevice as sd
 from scipy.io.wavfile import write as wav_write
 
-from fft_plot import FFTPlot
-from waveform_plot import WaveformPlot
-from filters import butter_lowpass, butter_highpass, apply_filter
-from slider_style import apply_slider_style
+from assets.fft_plot import FFTPlot
+from assets.waveform_plot import WaveformPlot
+from assets.filters import butter_lowpass, butter_highpass, apply_filter
+from assets.slider_style import apply_slider_style
 from pyqtgraph import GraphicsLayoutWidget
 
 # === Constants ===
