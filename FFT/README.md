@@ -29,10 +29,11 @@ python main.py
 ### Save Changes
     Save the filtered file name in your device
 ### Apply FIters
-1.- LOW PASS Filter
+1. LOW PASS Filter
 Creates a Butterwhole filtering the high frequencies,
 modify the cutoff frequencies using the bottom slides
-2.- HIGH PASS Filter
+
+2. HIGH PASS Filter
 Creates a Butterwhole filtering the low frequencies,
 modify the cutoff frequencies using the bottom slides
 ### Examples
