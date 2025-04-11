@@ -41,11 +41,11 @@ modify the cutoff frequencies using the bottom slides
   <tr>
     <td align="center">
         <img src="/FFT/assets/interface_02.png" alt="Video 1" width="500"/>
-      <h2>Using the low pass filter to clean high frequencies below 700 hz</h2>
+      <h2>Using the low pass filter to clean high frequencies above 700 hz</h2>
     </td>
     <td align="center">
         <img src="/FFT/assets/interface_03.png" alt="Video 2" width="500"/>
-      <h2>Using the high pass filter to clean low frequencies above 2000 hz</h2>
+      <h2>Using the high pass filter to clean low frequencies below 2000 hz</h2>
     </td>
   </tr>
 </table>
