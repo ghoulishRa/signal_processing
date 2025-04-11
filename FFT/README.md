@@ -1,6 +1,6 @@
 # Plotting FFT in real time
 
-<img src="/FFT/assets/interface_01.png" alt="image"/>
+<img src="/FFT/assets/interface_01.png" alt="image" width="500"/>
 
 ## Installation requeriments
 
